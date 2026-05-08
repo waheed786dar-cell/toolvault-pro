@@ -37,7 +37,17 @@ export async function POST(request: Request) {
       return validationErrorResponse(validation.errors)
     }
 
-    const { prompt, toolName, language, maxTokens } = validation.data
+const {
+  prompt,
+  toolName,
+  language,
+  maxTokens,
+} = validation.data as {
+  prompt: string
+  toolName?: string
+  language?: string
+  maxTokens?: number
+}
 
     // 4. Generate with Groq
     const result = await generateAI({
