@@ -131,18 +131,7 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
 
-  // Webpack
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-        net: false,
-        tls: false,
-      }
-    }
-    return config
-  },
+  
 
   // Logging
   logging: {
@@ -152,4 +141,4 @@ const nextConfig = {
   },
 }
 
-module.exports = withPWA(nextConfig)
+module.exports = nextConfig
