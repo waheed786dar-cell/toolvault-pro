@@ -8,6 +8,10 @@ import { useAuth } from '@/hooks/useAuth'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
+type UsageItem = {
+  used_at: string
+}
+
 export default function AnalyticsPage() {
   const { isAuthenticated, isLoading } = useAuth()
   const router = useRouter()

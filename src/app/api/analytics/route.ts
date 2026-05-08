@@ -23,20 +23,21 @@ export async function GET(request: Request) {
     startDate.setDate(startDate.getDate() - days)
 
     // Tool usage over time
+    // Line ~20 ke paas, usageData query replace karo:
     const { data: usageData } = await supabase
       .from('tool_usage')
       .select('tool_slug, tool_category, used_at, was_successful')
       .eq('user_id', user.id)
       .gte('used_at', startDate.toISOString())
       .order('used_at', { ascending: true })
-
+      .returns<{ tool_slug: string; tool_category: string; used_at: string; was_successful: boolean }[]>()
     // AI generations
-    const { data: aiData } = await supabase
+     const { data: aiData } = await supabase
       .from('ai_generations')
       .select('tool_name, tokens_used, created_at, was_successful')
       .eq('user_id', user.id)
       .gte('created_at', startDate.toISOString())
-
+      .returns<{ tool_name: string; tokens_used: number; created_at: string; was_successful: boolean }[]>()
     // Saved results count
     const { count: savedCount } = await supabase
       .from('saved_results')
