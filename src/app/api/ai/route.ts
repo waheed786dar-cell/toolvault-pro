@@ -44,7 +44,7 @@ const {
   maxTokens,
 } = validation.data as {
   prompt: string
-  toolName?: string
+  toolName: string
   language?: string
   maxTokens?: number
 }
