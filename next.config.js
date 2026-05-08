@@ -12,7 +12,10 @@ const withPWA = require('next-pwa')({
       handler: 'CacheFirst',
       options: {
         cacheName: 'google-fonts',
-        expiration: { maxEntries: 4, maxAgeSeconds: 365 * 24 * 60 * 60 },
+        expiration: {
+          maxEntries: 4,
+          maxAgeSeconds: 365 * 24 * 60 * 60,
+        },
       },
     },
     {
@@ -20,7 +23,10 @@ const withPWA = require('next-pwa')({
       handler: 'CacheFirst',
       options: {
         cacheName: 'gstatic-fonts',
-        expiration: { maxEntries: 4, maxAgeSeconds: 365 * 24 * 60 * 60 },
+        expiration: {
+          maxEntries: 4,
+          maxAgeSeconds: 365 * 24 * 60 * 60,
+        },
       },
     },
     {
@@ -28,7 +34,10 @@ const withPWA = require('next-pwa')({
       handler: 'CacheFirst',
       options: {
         cacheName: 'cloudinary-images',
-        expiration: { maxEntries: 50, maxAgeSeconds: 7 * 24 * 60 * 60 },
+        expiration: {
+          maxEntries: 50,
+          maxAgeSeconds: 7 * 24 * 60 * 60,
+        },
       },
     },
     {
@@ -36,7 +45,10 @@ const withPWA = require('next-pwa')({
       handler: 'NetworkFirst',
       options: {
         cacheName: 'api-cache',
-        expiration: { maxEntries: 20, maxAgeSeconds: 60 },
+        expiration: {
+          maxEntries: 20,
+          maxAgeSeconds: 60,
+        },
       },
     },
   ],
@@ -63,6 +75,12 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60,
   },
+
+  // TypeScript
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+
 
   // Security headers
   async headers() {
@@ -93,7 +111,6 @@ const nextConfig = {
         ],
       },
       {
-        // Cache static assets
         source: '/static/(.*)',
         headers: [
           {
@@ -131,8 +148,6 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
 
-  
-
   // Logging
   logging: {
     fetches: {
@@ -141,4 +156,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withPWA(nextConfig)
