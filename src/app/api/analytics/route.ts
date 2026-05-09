@@ -46,10 +46,11 @@ export async function GET(request: Request) {
 
     // Profile stats
     const { data: profile } = await supabase
-      .from('profiles')
-      .select('tools_used_count, created_at')
-      .eq('id', user.id)
-      .single()
+     .from('profiles')
+     .select('tools_used_count, created_at')
+     .eq('id', user.id)
+     .returns<{ tools_used_count: number; created_at: string }[]>()
+     .single()
 
     // Group usage by day
     const usageByDay: Record<string, number> = {}
