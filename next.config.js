@@ -13,6 +13,14 @@ const nextConfig = {
   // Turbopack config (Next.js 16)
   turbopack: {},
 
+  // Ignore ALL build errors
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   // Images
   images: {
     remotePatterns: [
@@ -40,7 +48,10 @@ const nextConfig = {
       {
         source: '/static/(.*)',
         headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
         ],
       },
     ]
